@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import tkinter as tk
-from tkinter import Scale, VERTICAL
+from tkinter import Scale
 
 # ---------------------------
 MARGIN = 10  # Margin around tile
+
 
 def update_color(*args):
     """Update tile color from slider values."""
@@ -13,21 +14,25 @@ def update_color(*args):
     color = f"#{r:02x}{g:02x}{b:02x}"
     canvas.itemconfig(tile, fill=color)
 
+
 def resize_tile(event):
     """Resize tile when canvas size changes, keeping margin."""
     w = canvas.winfo_width()
     h = canvas.winfo_height()
-    side = min(w, h) - 2*MARGIN
+    side = min(w, h) - 2 * MARGIN
     side = max(side, 10)  # prevent zero or negative
 
-    x0 = (w - side)//2
-    y0 = (h - side)//2
+    x0 = (w - side) // 2
+    y0 = (h - side) // 2
     x1 = x0 + side
     y1 = y0 + side
 
     canvas.coords(tile, x0, y0, x1, y1)
 
+
 # ---------------------------
+# --- Main Application Setup ---
+
 root = tk.Tk()
 root.title("RGB Colour Tile")
 root.geometry("1000x700")
@@ -54,20 +59,37 @@ canvas.bind("<Configure>", resize_tile)
 sliders = tk.Frame(outer, padx=10)
 sliders.grid(row=0, column=1, sticky="ns")
 
-r_scale = Scale(sliders, from_=0, to=255, orient=VERTICAL,
-                label="R", command=update_color)
+r_scale = Scale(
+    sliders,
+    from_=0,
+    to=255,
+    orient=tk.VERTICAL,
+    label="R",
+    command=update_color
+)
 r_scale.set(255)
 r_scale.pack(pady=10)
 
-g_scale = Scale(sliders, from_=0, to=255, orient=VERTICAL,
-                label="G", command=update_color)
+g_scale = Scale(
+    sliders,
+    from_=0,
+    to=255,
+    orient=tk.VERTICAL,
+    label="G",
+    command=update_color
+)
 g_scale.set(255)
 g_scale.pack(pady=10)
 
-b_scale = Scale(sliders, from_=0, to=255, orient=VERTICAL,
-                label="B", command=update_color)
+b_scale = Scale(
+    sliders,
+    from_=0,
+    to=255,
+    orient=tk.VERTICAL,
+    label="B",
+    command=update_color
+)
 b_scale.set(255)
 b_scale.pack(pady=10)
 
 root.mainloop()
-
