@@ -9,7 +9,7 @@ def pixelate_image(input_path: Path, output_path: Path, block_size: int):
 
     Args:
         input_path (Path): Path to input image.
-        output_path (Path): Path to save pixelated image.
+        output_path (Path): Path for saved pixelated image.
         block_size (int): Pixel block size.
     """
     if block_size <= 0:
